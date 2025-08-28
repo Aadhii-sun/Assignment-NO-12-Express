@@ -17,7 +17,7 @@ const getStoredItems = (req, res) => {
 
 const getStoredItemsById = (req, res) => {
   try {
-    const storedItem = storedItems.find((s) => s.id === parent(req.params.id));
+    const storedItem = storedItems.find(s => s.id === parent(req.params.id));
     if (!storedItem) {
       return res.status(404).json({ message: "No Item Found" });
     }
