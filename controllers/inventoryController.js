@@ -17,7 +17,7 @@ const getStoredItems = (req, res) => {
 
 const getStoredItemsById = (req, res) => {
   try {
-    const storedItem = storedItems.find(s => s.id === parent(req.params.id));
+    const storedItem = storedItems.find(s => s.id === parseInt(req.params.id));
     if (!storedItem) {
       return res.status(404).json({ message: "No Item Found" });
     }
@@ -52,9 +52,9 @@ const createStoredItems = (req, res) => {
 
 // PUT - complete update  
 
-const updateSToredItems=(req,res)=>{
+const updateStoredItems=(req,res)=>{
     try{
-        const id=parent(req.params.id);
+        const id=parseInt(req.params.id);
         const {item,balance,price}=req.body;
 
         if (!item || !balance || !price) {
@@ -106,11 +106,11 @@ const deleteStoredItems = (req, res) => {
       return res.status(404).json({ message: "No item found" });
     }
 
-    const deleteStoredItems = storedItems.splice(storedItemsIndex, 1);
-    res.status(200).json({ message: "item deleted successfully", deleteStoredItems });
+    const deletedItem  = storedItems.splice(storedItemsIndex, 1);
+    res.status(200).json({ message: "item deleted successfully", deletedItem });
   } catch (error) {
     res.status(500).json({ message: "Server Error" });
   }
 };
 
-module.exports={getStoredItems,getStoredItemsById,createStoredItems,updateSToredItems,editStoredItems,deleteStoredItems}
+module.exports={getStoredItems,getStoredItemsById,createStoredItems,updateStoredItems,editStoredItems,deleteStoredItems}
